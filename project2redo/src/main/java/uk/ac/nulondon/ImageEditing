@@ -13,6 +13,29 @@ public class ImageEditing{
   private Image currentImage; 
   private Stack<Edit> editHistory=new Stack<>(); 
 
-  
+ /**
+  * Class to represent an edit, which keeps track of the
+  * Operation, affected column index, and column data.
+  */
+ private static class Edit {
+    private P1Operation operation;
+    private int affectedColumn;
+     private ArrayList<Color> affectedColumnData;
 
+     public Edit(P1Operation operation, int affectedColumn, ArrayList<Color> affectedColumnData) {
+        this.operation = operation;
+        this.affectedColumn = affectedColumn;
+        this.affectedColumnData = affectedColumnData;
+     }
+    }  
+
+    /**
+     * Add an entry to the edit history after each highlight, delete, and undo
+     * @param operation the operation we completed
+     * @param affectedColumn the column that was affected
+     * @param affectedColumnData the data at the column after the edit executes
+     */
+    private void saveEditHistory(P1Operation operation, int affectedColumn, ArrayList<Color> affectedColumnData) {
+        editHistory.add(new Edit(operation, affectedColumn, affectedColumnData));
+    }
 }
